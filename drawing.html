@@ -1,0 +1,58 @@
+<html>
+	<head>
+		<title>Drawing</title>
+		<style>
+			#my_canvas:active {
+				cursor:crosshair;
+			
+			}
+		</style>
+		<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	</head>
+	<body>
+		
+		<canvas id = "my_canvas" width = "550" height = "400" style = "border:1px solid black;">
+			
+		</canvas>
+		
+		<p id = "coor"></p>
+		<p id = "coor2">HCAF</p>
+		
+		<form>
+			<input type = "radio" name = "color" value= "black" checked> Black
+			<br>
+			<input type = "radio" name = "color" value= "green"> Green
+			<br>
+			<input type = "radio" name = "color" value= "red"> Red
+			<br>
+			<input type = "radio" name = "color" value= "yellow"> Yellow
+			<br>
+			<input type = "radio" name = "color" value= "blue"> Blue
+			<br>
+			<input type = "radio" name = "color" value= "purple"> Purple
+
+		</form>
+		<script>
+			var click = document.getElementById("my_canvas");
+			click.onmousedown = function() {
+				document.onmousemove = function() {
+					//var canvas = document.getElementById("my_canvas");
+					var mouse_x = event.clientX;
+					var mouse_y = event.clientY;
+					var coor = "X coor:" + mouse_x + " Y coor:" + mouse_y;
+					var ctx = click.getContext("2d");
+					//ctx.fillStyle = color;
+					ctx.fillRect(mouse_x - 10, mouse_y - 10, 10, 10);
+					ctx.stroke();
+					document.getElementById("coor").innerHTML =  coor;
+				}
+			}
+			click.onmouseup = function() {
+				document.getElementById("coor").innerHTML = "";
+				document.onmousemove = function(){};
+			}
+			//document.getElementById("coor2").innerHTML = $('input[name="genderS"]:checked').val();
+		</script>
+	</body>
+</html>
