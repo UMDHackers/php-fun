@@ -15,9 +15,23 @@
         if(empty($name) || empty($password)) {
             echo "Missing infromation";
         } else {
-            echo "Username: ".$name;
-            echo "<br>";
-            echo "Password: ".$password;
+           // Create connection 
+		   $conn = new mysqli("localhost", "XXXX", "XXXXXX", "XXXXXX");
+		   
+		   // Check connection
+		   if($conn->connect_error) {
+				die("Connection failed: " . $conn->connect_error);
+		   }
+		   //echo "Connected successfully"."<br>";
+		   $sql = "SELECT username, passcode FROM users where username = '$name' and passcode = '$password'";
+		   $result = $conn->query($sql);
+		 
+		   if(empty($result->fetch_assoc())) {
+				echo "Don't exist in the database"."<br>";
+		   } else {
+				header("Location: profile.php?username=$name");
+		   }
+		   
         }
     } 
  ?>
