@@ -20,7 +20,7 @@
         }
         else {
             // Create connection
-				$conn = new mysqli("","", "", "");
+						$conn = new mysqli("XX","XX", "XX", "XX");
 
 				// Check connection
 				if ($conn->connect_error) {
@@ -39,6 +39,7 @@
 					$file_system = $user."_whiteborad" ;
 					$sql = "INSERT INTO users (user_name, password, file_location) VALUES ('$user', '$password1', '$file_system')";
 					if ($conn->query($sql) === TRUE) {
+						$conn->close();
 						//Create dafult JPG and get the JPG image and place that in images table
 						//Create image
 						$image = imagecreatetruecolor(950, 400);
@@ -46,7 +47,7 @@
 						imagefill($image, 255, 255, 255);
 
 						//save to file system, my local drive
-						imagejpeg($image, 'drawing/'.$file_system);
+						imagejpeg($image, 'drawings/'.$file_system.'.jpg');
 
 						header("Location: profile.php?username=$user");
 					} else {
